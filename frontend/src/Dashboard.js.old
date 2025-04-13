@@ -1,0 +1,102 @@
+// Dashboard.js
+import React, { useState } from 'react';
+import axios from 'axios';
+import './dashboard.css'; // <-- Import the CSS here
+
+function Dashboard() {
+  const [steamId, setSteamId] = useState('');
+  const [stats, setStats] = useState(null);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!steamId.trim()) {
+      setError('Please enter a valid Steam ID.');
+      return;
+    }
+    setLoading(true);
+    setError('');
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/api/stats/csgo/steam/${steamId.trim()}`
+      );
+      setStats(response.data);
+    } catch (err) {
+      console.error(err);
+      setError('Error fetching data from Tracker.gg.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleReset = () => {
+    setSteamId('');
+    setStats(null);
+    setError('');
+  };
+
+  return (
+    <div className="app">
+      {/* Header */}
+      <header className="header">
+        <h1>Headshot Hub</h1>
+      </header>
+
+      {/* Main Content */}
+      <main>
+        {/* If user hasn't fetched stats yet */}
+        {!stats ? (
+          <div className="container">
+            <h2>Enter Your Steam ID</h2>
+            {error && <p className="error">{error}</p>}
+            {loading ? (
+              <p>Loading stats...</p>
+            ) : (
+              <form onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  placeholder="Steam ID"
+                  value={steamId}
+                  onChange={(e) => setSteamId(e.target.value)}
+                />
+                <button type="submit">Get Stats</button>
+              </form>
+            )}
+          </div>
+        ) : (
+          <div className="container">
+            <h2>CS:GO Performance Dashboard</h2>
+            <button onClick={handleReset} style={{ marginBottom: '1rem' }}>
+              Reset
+            </button>
+
+            <div className="stats">
+              <div className="stat-card">
+                <h3>Total Kills</h3>
+                <p>{stats.kills || 'N/A'}</p>
+              </div>
+
+              <div className="stat-card">
+                <h3>Total Deaths</h3>
+                <p>{stats.deaths || 'N/A'}</p>
+              </div>
+
+              <div className="stat-card">
+                <h3>K/D Ratio</h3>
+                <p>{stats.kdRatio || 'N/A'}</p>
+              </div>
+            </div>
+          </div>
+        )}
+      </main>
+
+      {/* Footer */}
+      <footer className="footer">
+        <p>&copy; 2025 Headshot Hub</p>
+      </footer>
+    </div>
+  );
+}
+
+export default Dashboard;

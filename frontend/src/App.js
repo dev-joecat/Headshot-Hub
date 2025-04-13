@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LandingScreen from './LandingScreen';
+import CsgoDashboard from './CsgoDashboard';
+import ApexDashboard from './ApexDashboard';
+import SplitgateDashboard from './SplitgateDashboard';
+import Division2Dashboard from './Division2Dashboard';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingScreen />} />
+        <Route path="/csgo" element={<CsgoDashboard />} />
+        <Route path="/apex" element={<ApexDashboard />} />
+        <Route path="/splitgate" element={<SplitgateDashboard />} />
+        <Route path="/division2" element={<Division2Dashboard />} />
+      </Routes>
+    </Router>
   );
 }
 

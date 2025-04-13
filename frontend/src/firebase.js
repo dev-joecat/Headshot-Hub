@@ -1,16 +1,23 @@
 // src/firebase.js
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 
+// Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  apiKey: "AIzaSyCAs6vIiHB5vrDSWLxWmKqf8pTq3p3Gr9o",
+  authDomain: "headshot-hub.firebaseapp.com",
+  projectId: "headshot-hub",
+  storageBucket: "headshot-hub.firebasestorage.app",
+  messagingSenderId: "609896146141",
+  appId: "1:609896146141:web:2d24883173bb97c778e734",
+  measurementId: "G-8TGNDEDLSE"
 };
 
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
 export const auth = firebase.auth();
 export default firebase;
