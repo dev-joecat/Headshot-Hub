@@ -20,7 +20,7 @@ function ApexDashboard() {
     try {
       // Calls the backend endpoint for Apex Legends stats.
       const response = await axios.get(
-        `http://localhost:5000/api/stats/apex/${originId.trim()}`
+        `http://headshot-hub-production.up.railway.app/api/stats/apex/${originId.trim()}`
       );
       setStats(response.data);
     } catch (err) {

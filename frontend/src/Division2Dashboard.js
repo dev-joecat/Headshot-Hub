@@ -21,8 +21,14 @@ function Division2Dashboard() {
     try {
       // Call the backend endpoint with the selected platform and user ID.
       const response = await axios.get(
-        `http://localhost:5000/api/stats/division2/${platform}/${userId.trim()}`
+        `http://headshot-hub-production.up.railway.app/api/stats/division2/${platform}/${userId.trim()}`
       );
+
+      // ^^^^ previously was       const response = await axios.get(
+      //  `http://localhost:5000/api/stats/division2/${platform}/${userId.trim()}`
+      //);
+
+
       setStats(response.data);
     } catch (err) {
       console.error(err);

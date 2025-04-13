@@ -20,7 +20,7 @@ function SplitgateDashboard() {
     setError('');
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/stats/splitgate/${platform}/${userId.trim()}`
+        `http://headshot-hub-production.up.railway.app/api/stats/splitgate/${platform}/${userId.trim()}`
       );
       setStats(response.data);
     } catch (err) {

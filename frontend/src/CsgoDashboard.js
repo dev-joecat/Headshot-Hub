@@ -25,7 +25,7 @@ function CsgoDashboard() {
       // Make a GET request to your backend that calls the Tracker.gg CS:GO API.
       // The endpoint hardcodes the platform as "steam" and appends the entered Steam ID.
       const response = await axios.get(
-        `http://localhost:5000/api/stats/csgo/steam/${steamId.trim()}`
+        `http://headshot-hub-production.up.railway.app/api/stats/csgo/steam/${steamId.trim()}`
       );
       
       // Update the state with the returned stats
